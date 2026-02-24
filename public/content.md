@@ -154,7 +154,7 @@ On Mac: `Cmd + Space` → type "Terminal" → Enter
 | `cd` | Navigate into a folder | `cd Desktop` |
 | `cd ..` | Go up one level | `cd ..` |
 | `npm install` | Installs a project's dependencies | `npm install` |
-| `npm run dev` | Starts your local development server | `npm run dev` |
+| `npm start` | Starts your local development server because you're using react (if building a web app, you would use npm run dev) | `npm start` |
 
 **To stop a running server:** `Ctrl + C`
 
