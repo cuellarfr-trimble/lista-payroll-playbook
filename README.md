@@ -1,6 +1,6 @@
 # AI Prototyping Guide for Designers
 
-A practical, interactive guide for designers learning to build real prototypes with Claude Code and Cursor. Built by the design team at [Savvy Wealth](https://www.savvywealth.com).
+A practical, interactive guide for designers learning to build real prototypes with Claude Code and Cursor. Built by the design team at [Trimble](https://www.savvywealth.com).
 
 **[View the live guide →](https://savvy-s-ai-prototyping-guide.vercel.app/)**
 
@@ -62,7 +62,7 @@ Edit that file and refresh your browser — no code changes needed. The app fetc
 
 ## About
 
-Built by Monica, Design Manager at Savvy Wealth, as part of an initiative to get the design team building real, shareable prototypes using AI tools. The guide itself was built using the exact workflow it teaches — Claude Code and Cursor.
+Built by Monica, Design Manager at Trimble, as part of an initiative to get the design team building real, shareable prototypes using AI tools. The guide itself was built using the exact workflow it teaches — Claude Code and Cursor.
 
 Feel free to fork it and adapt it for your own team.
 

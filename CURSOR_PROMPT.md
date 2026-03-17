@@ -2,7 +2,7 @@
 
 ## What you're building
 
-A single-page React web app that renders `content.md` as a beautifully designed, interactive guide. This is an internal tool for a fintech design team, built in the visual style of Savvy Wealth's design system.
+A single-page React web app that renders `content.md` as a beautifully designed, interactive guide. This is an internal tool for a fintech design team, built in the visual style of Trimble's design system.
 
 The app should feel like a high-quality editorial web experience — not a docs site, not a corporate intranet. Think: Linear's docs meets a refined fintech product.
 

@@ -1,5 +1,5 @@
 # AI Prototyping for Designers
-**Savvy Wealth's practical guide to building real things with Claude Code + Cursor for designers**
+**Trimble's practical guide to building real things with Claude Code + Cursor for designers**
 
 ---
 
