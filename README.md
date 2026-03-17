@@ -1,8 +1,8 @@
 # AI Prototyping Guide for Designers
 
-A practical, interactive guide for designers learning to build real prototypes with Claude Code and Cursor. Built by the design team at [Trimble](https://www.savvywealth.com).
+A practical, interactive guide for designers learning to build real prototypes with Claude Code and Cursor. Built by the design team at [Trimble](https://www.trimble.com).
 
-**[View the live guide →](https://savvy-s-ai-prototyping-guide.vercel.app/)**
+**[View the live guide →]()**
 
 ---
 
@@ -29,8 +29,8 @@ Designers and PMs who want to go beyond Figma and build things that feel real. N
 ## Running it locally
 
 ```bash
-git clone https://github.com/monicycle/Savvy-s-AI-Prototyping-Guide.git
-cd Savvy-s-AI-Prototyping-Guide
+git clone https://github.com/monicycle/Trimble-s-AI-Prototyping-Guide.git
+cd Trimble-s-AI-Prototyping-Guide
 npm install
 npm start
 ```

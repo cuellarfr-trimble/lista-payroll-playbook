@@ -34,7 +34,7 @@ npm install react-markdown remark-gfm react-syntax-highlighter
 --color-text-primary: #1A1A1A
 --color-text-secondary: #6B6B6B
 --color-text-tertiary: #9B9B9B
---color-accent: #1B4332        /* Deep forest green — Savvy primary */
+--color-accent: #1B4332        /* Deep forest green — Trimble primary */
 --color-accent-light: #D1FAE5  /* Mint tint for highlights */
 --color-accent-muted: #2D6A4F  /* Slightly lighter green for hover states */
 --color-code-bg: #F3F4F6
@@ -89,7 +89,7 @@ On mobile (< 768px): sidebar collapses, add a hamburger menu or just stack conte
 ### Left sidebar
 
 - Fixed position, full height, white background, right border `1px solid var(--color-border)`
-- Top: Savvy wordmark or "Design Team" label in small caps
+- Top: Trimble wordmark or "Design Team" label in small caps
 - Below: vertical list of section links (auto-generated from h2 headings in the markdown)
 - Active section highlighted with left border accent `3px solid var(--color-accent)` and text color change
 - Section numbers shown in tertiary text color to the left of each link
@@ -208,7 +208,7 @@ A minimal fixed header at the top:
 - Height: 56px
 - Background: white with `border-bottom: 1px solid var(--color-border)`
 - Left: "AI Prototyping Guide" in DM Sans, weight 500, small
-- Right: "Savvy Design Team" label in tertiary color + small Savvy green dot indicator
+- Right: "Trimble Design Team" label in tertiary color + small Trimble green dot indicator
 
 ---
 

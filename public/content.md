@@ -40,7 +40,7 @@ Claude Code and Cursor can both do all three of these for you through conversati
 
 **Create your account:**
 1. Go to [github.com](https://github.com)
-2. Click "Sign up" and create an account with your Savvy email
+2. Click "Sign up" and create an account with your Trimble email
 3. Choose the free plan — it's all you need for prototyping
 4. Verify your email
 
@@ -85,7 +85,7 @@ Cursor is a code editor — the app you'll use to read and write code — with A
 Before moving on, confirm you have all of these:
 
 - [ ] Received company access to Claude, Claude Code, Cursor, and Vercel from Monica
-- [ ] GitHub account created at github.com with your Savvy email
+- [ ] GitHub account created at github.com with your Trimble email
 - [ ] Vercel account created at vercel.com, connected to GitHub
 - [ ] Cursor downloaded, installed, and account created
 
@@ -113,7 +113,7 @@ Two concepts will make everything else in this guide click.
 
 A **desktop app** is software installed on your computer — like Figma, Slack, or Spotify. It lives in your Applications folder.
 
-A **web app** is software that runs in a browser — like Gmail, Notion, or the Savvy client dashboard. It lives at a URL.
+A **web app** is software that runs in a browser — like Gmail, Notion, or the Trimble client dashboard. It lives at a URL.
 
 When we build prototypes, we're building web apps. That means the output is a URL you can share with anyone, on any device, with no installation required. It also means the code runs in a browser, which shapes everything about how we build it.
 
@@ -254,7 +254,7 @@ Open your browser and go to `localhost:3000`. You should see the default React w
 
 ## 5. Building your first prototype with Claude Code
 
-Let's build something real. We'll use a Savvy-flavored example: a client portfolio summary card.
+Let's build something real. We'll use a Trimble-flavored example: a client portfolio summary card.
 
 ### Starting a session
 
@@ -510,7 +510,7 @@ That's fine. You don't need to understand every line. Describe what you want to 
 Low pressure. Concrete steps.
 
 **Day 1 — Environment, first component, and Figma connection (all in one hour)**
-Get your environment running, build something real, and connect to Figma — all in a single focused session. Install Node.js, get Claude Code or Cursor running, create a React project, and see `localhost:3000` in your browser. Then ask Claude Code to build one component from scratch using a real Savvy use case — a data table, a summary card, a form. Finally, set up the Figma MCP connection and do one round-trip: take a frame from a current project, generate a component from it, and send something back. Don't aim for perfection. Just get the full loop working.
+Get your environment running, build something real, and connect to Figma — all in a single focused session. Install Node.js, get Claude Code or Cursor running, create a React project, and see `localhost:3000` in your browser. Then ask Claude Code to build one component from scratch using a real Trimble use case — a data table, a summary card, a form. Finally, set up the Figma MCP connection and do one round-trip: take a frame from a current project, generate a component from it, and send something back. Don't aim for perfection. Just get the full loop working.
 
 **Day 2 — Build**
 Take whatever you built on Day 1 and spend 30 minutes improving it through conversation. Practice describing visual changes in words — spacing, hierarchy, color, interaction. This is the core skill. The more precisely you can describe what you want, the faster Claude moves.
