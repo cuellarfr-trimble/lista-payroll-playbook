@@ -9,10 +9,9 @@ This section isn't part of the learning curve. It's just logistics. Get these so
 
 ### Step 1: Request company access
 
-Some of these tools require a paid seat or company account. Before doing anything else, reach out to the Cloud team and ask for access to:
+Some of these tools require a paid seat or company account. Before doing anything else, [reach out to the Cloud team and ask for access](https://support.trimble.cloud/support/catalog/items/50) to:
 
 - **Cursor** — AI-powered code editor
-<!-- - **Vercel** — deployment platform for sharing your prototypes -->
 
 ---
 
