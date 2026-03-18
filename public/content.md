@@ -569,5 +569,5 @@ Over time you'll develop an intuition for when something warrants Opus versus wh
 
 ---
 
-*Questions? Drop them in #team-design or tag Monica.*
+*Questions? [Join the Cursor Users group on Google Chat](https://chat.google.com/room/AAQA3co-ZvQ?cls=7)*
 
