@@ -1,5 +1,5 @@
 # AI Prototyping for Designers
-**Trimble's practical guide to building real things with Claude Code + Cursor for designers**
+**Trimble's practical guide to building real things with Cursor for designers**
 
 ---
 
@@ -32,7 +32,7 @@ You don't need to deeply understand GitHub to use it in this workflow. There are
 - **Commit** — save a snapshot of your changes with a short description
 - **Push** — send your local changes up to GitHub
 
-Claude Code and Cursor can both do all three of these for you through conversation. You won't need to memorize commands.
+Cursor can do all three of these for you through conversation. You won't need to memorize commands.
 
 **Create your account:**
 1. Go to [github.com](https://github.com)
