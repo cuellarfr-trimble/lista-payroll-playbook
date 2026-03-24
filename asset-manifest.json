@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/lista-payroll-playbook/static/css/main.4295878c.css",
-    "main.js": "/lista-payroll-playbook/static/js/main.458cd049.js",
+    "main.css": "/lista-payroll-playbook/static/css/main.47fd53dd.css",
+    "main.js": "/lista-payroll-playbook/static/js/main.b6e35df7.js",
     "static/js/453.e888357f.chunk.js": "/lista-payroll-playbook/static/js/453.e888357f.chunk.js",
     "index.html": "/lista-payroll-playbook/index.html",
-    "main.4295878c.css.map": "/lista-payroll-playbook/static/css/main.4295878c.css.map",
-    "main.458cd049.js.map": "/lista-payroll-playbook/static/js/main.458cd049.js.map",
+    "main.47fd53dd.css.map": "/lista-payroll-playbook/static/css/main.47fd53dd.css.map",
+    "main.b6e35df7.js.map": "/lista-payroll-playbook/static/js/main.b6e35df7.js.map",
     "453.e888357f.chunk.js.map": "/lista-payroll-playbook/static/js/453.e888357f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4295878c.css",
-    "static/js/main.458cd049.js"
+    "static/css/main.47fd53dd.css",
+    "static/js/main.b6e35df7.js"
   ]
 }
