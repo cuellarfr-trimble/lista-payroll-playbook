@@ -25,7 +25,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    fetch('/content.md')
+    fetch(`${process.env.PUBLIC_URL}/content.md`)
       .then((res) => res.text())
       .then((text) => {
         setMarkdown(text);
