@@ -2,7 +2,7 @@
 
 A practical, interactive guide for designers learning to build real prototypes with Cursor. Built by the design team at [Trimble](https://www.trimble.com).
 
-**[View the live guide →](https://trimble-ai-proto.vercel.app/)**
+**[View the live guide →](https://cuellarfr-trimble.github.io/prototyping-playbook/)**
 
 ---
 
@@ -30,8 +30,8 @@ Designers and PMs who want to go beyond Figma and build things that feel real. N
 ## Running it locally
 
 ```bash
-git clone https://github.com/cuellarfr-trimble/trimble-ai-proto.git
-cd trimble-ai-proto
+git clone https://github.com/cuellarfr-trimble/prototyping-playbook.git
+cd prototyping-playbook
 npm install
 npm start
 ```
@@ -57,7 +57,6 @@ Edit that file and refresh your browser — no code changes needed. The app fetc
 - React (Create React App)
 - `react-markdown` + `remark-gfm` for markdown rendering
 - `react-syntax-highlighter` for code blocks
-- Deployed on Vercel
 
 ---
 
