@@ -291,7 +291,7 @@ This is useful when Cursor generates code using a deprecated API or an outdated 
 
 ### Your first prompt
 
-Now that Modus is configured, let's build something. We'll use a Trimble-flavored example: a client portfolio summary card.
+Now that Modus is configured, let's build something. We'll use a Trimble-flavored example: a dashboard app.
 
 Open Cursor and press `Cmd + I` to open Composer. Try this prompt:
 
