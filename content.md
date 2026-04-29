@@ -240,6 +240,8 @@ The [Modus design system](https://modus.trimble.com) provides a one-step setup t
 | `modus-wc-react-slotted-hosts` | React slotted host components |
 | `modus-wc-side-navigation` | Side navigation component |
 
+There's also an optional set of [Design Skills](https://cuellarfr.github.io/design-skills/) — additional Cursor skills focused on design workflows like layout composition, visual QA, and responsive patterns. These aren't part of the one-step setup but can be useful if you want more guided assistance with design-specific tasks. You can browse and install them individually from the link above.
+
 **How to run the one-step setup:**
 
 1. Open Cursor and press `Cmd + I` to open Composer
