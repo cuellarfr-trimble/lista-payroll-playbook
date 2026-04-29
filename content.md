@@ -465,21 +465,17 @@ AI coding tools aren't free to run. Every prompt you send uses credits, and the 
 
 ### Understanding the model tiers
 
-Cursor gives you access to different models at different capability (and cost) levels. Think of them like tools in a toolbox — you wouldn't use a sledgehammer to hang a picture frame.
+Cursor gives you access to different models at different capability (and cost) levels.
 
-**Composer 2** is Cursor's own model, tuned specifically for multi-file edits and agent-style runs. It's the default for a reason — fast, capable, and optimized for the kinds of tasks you'll do most: building components, iterating on layouts, wiring up pages. For most prototyping work, this is the one to use.
+**Composer 2** — Cursor's default. Fast, capable, and tuned for multi-file edits. Use this for most prototyping work.
 
-**Composer 2 Fast** is the lightweight version of Composer 2. Use it for simple, mechanical tasks — updating a hex color value, changing a text string, reformatting a file, fixing a typo. If the task requires almost no judgment, this saves credits without losing quality.
+**Composer 2 Fast** — Lightweight version. Best for trivial changes like updating a color or fixing a typo.
 
-**Claude Opus** (Anthropic) is the most powerful reasoning model available in Cursor. It's built for hard thinking — complex architecture decisions, debugging gnarly problems you can't figure out, or generating a large feature from scratch with a lot of moving parts. Use it when you're stuck or when the task genuinely requires reasoning through something complicated. Don't burn Opus on simple tasks.
+**Claude Opus** — The most powerful reasoning model. Use it when you're stuck on something complex or need to generate a large feature from scratch. Don't burn it on simple tasks.
 
-**Claude Sonnet** (Anthropic) sits between Composer 2 and Opus. Strong reasoning and instruction-following with generous context. Good for careful refactors, large-diff review, and spec-to-code work when you want the model to read deeply before it edits.
+**Claude Sonnet** — Strong reasoning at lower cost than Opus. Good for careful refactors and spec-to-code work.
 
-**GPT-5.5** (OpenAI) is another high-capability option. Broad coding knowledge and solid tool use — useful as an alternative perspective when Composer 2 or Sonnet output isn't quite landing, or when your team standardizes on OpenAI models.
-
-**Auto mode** lets Cursor pick the model for you based on the complexity of your prompt. It routes simple tasks to fast models and complex tasks to stronger ones. This is a good default if you don't want to think about model selection — it won't always be optimal, but it prevents the most common mistake (burning expensive models on trivial edits).
-
-**A simple rule of thumb:** if you could explain the task to a junior engineer in one sentence and they'd get it right, use Composer 2 Fast or Auto. If you'd need to sit down and walk through it together, use Opus.
+**Auto** — Lets Cursor pick the model based on prompt complexity. A good default if you don't want to think about model selection.
 
 ### How to switch models in Cursor
 
