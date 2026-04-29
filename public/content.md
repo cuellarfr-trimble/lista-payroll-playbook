@@ -253,6 +253,40 @@ When it finishes, restart Cursor so the MCP connection initializes. You can veri
 
 > **Important:** Node.js must be installed before running the one-step setup (you did this in section 4). The MCP server uses `npx` to run, which comes with Node.
 
+### Also recommended: Playwright MCP
+
+While you're setting up MCP servers, add **Playwright** to your `~/.cursor/mcp.json`. Playwright gives Cursor the ability to open a browser, navigate your prototype, take screenshots, click elements, and fill in forms — essentially letting the AI see and test what it builds.
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    }
+  }
+}
+```
+
+With Playwright connected, you can ask Cursor things like *"Open the prototype in a browser and check if the sidebar navigation works"* or *"Take a screenshot of the dashboard and tell me if anything looks off."* It's especially useful for catching layout issues and testing interactive flows without switching to the browser yourself.
+
+### Also recommended: Context7 MCP
+
+**Context7** gives Cursor access to up-to-date documentation for any library or framework you're using. Instead of relying on the AI's training data (which can be months out of date), Context7 pulls the latest docs on demand — React, Next.js, Tailwind, or any other package.
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {}
+    }
+  }
+}
+```
+
+This is useful when Cursor generates code using a deprecated API or an outdated pattern. With Context7, the AI can look up the current docs and get it right the first time.
+
 ---
 
 ### Your first prompt
@@ -321,90 +355,25 @@ This is where things get exciting. By connecting Cursor to Figma, you can go str
 
 This is a one-way connection: Figma → Code. You can pull designs into Cursor, but you can't push code back to Figma. That's fine for prototyping — the goal is to get from design to a working, shareable URL as fast as possible.
 
----
+### Setting up the Figma MCP server
 
-### Step 1: Generate your Figma API token
+Figma has a built-in plugin that makes setup easy — no API tokens or config files to edit manually.
 
-In Figma: click your profile icon → Settings → Security → Personal access tokens → Generate new token.
+1. Open Cursor's command palette: `Cmd + Shift + P`
+2. Search for **"Open chat"** and select it
+3. Type `/add-plugin figma` and hit Enter
+4. Click **Add Plugin** to install
+5. Open the command palette again (`Cmd + Shift + P`) and search for **"Cursor Settings"**
+6. Select **Tools & MCP**
+7. Under "Installed MCP Servers," find **Figma** and click **Connect** to authenticate
 
-When it asks about permissions, **turn on read access**. This is what Cursor needs to read your designs.
+That's it. Cursor now has access to your Figma files.
 
-Copy the token and save it somewhere safe like 1Password. You won't be able to see it again after closing the modal.
-
----
-
-### Step 2: Store the token in your shell
-
-This is the step most people get stuck on. You're going to store your token as an environment variable so Cursor can access it automatically every time it runs.
-
-In Terminal, open your `.zshrc` file:
-
-```bash
-nano ~/.zshrc
-```
-
-This opens a basic text editor inside Terminal. Use the arrow keys to scroll all the way to the **bottom** of the file. On a completely new line, paste exactly this:
-
-```bash
-export FIGMA_API_KEY="your-token-here"
-```
-
-Replace `your-token-here` with the token you copied from Figma. Keep the quotes.
-
-Save and exit:
-- `Ctrl + O` to save
-- `Enter` to confirm
-- `Ctrl + X` to exit
-
-Now apply the change without restarting Terminal:
-
-```bash
-source ~/.zshrc
-```
-
-Verify it worked:
-
-```bash
-echo $FIGMA_API_KEY
-```
-
-You should see your token printed back. If you see nothing, the save didn't work — try again, making sure you're pasting on a new line at the very bottom of the file.
-
-> **Important:** if you accidentally paste your token directly into Terminal as a command (instead of inside nano), Figma will detect it as an exposed key and automatically invalidate it. If that happened, go back to Figma and generate a fresh token before continuing.
+> **Note:** If your organization requires the Desktop version instead of the Remote server, see [Figma's setup guide](https://help.figma.com/hc/en-us/articles/39889260656407-Cursor-and-Figma-Set-up-the-MCP-server) for the Desktop MCP option, which runs locally through the Figma desktop app.
 
 ---
 
-### Step 3: Add the Figma MCP server to Cursor
-
-Now tell Cursor where to find Figma. Open (or create) the file `~/.cursor/mcp.json` and add the Figma server entry. If you already have Modus configured from the one-step setup, you'll be adding to the existing `mcpServers` object:
-
-```json
-{
-  "mcpServers": {
-    "modus-docs": {
-      "command": "npx",
-      "args": ["-y", "@trimble-oss/moduswebcomponents-mcp@latest"]
-    },
-    "figma": {
-      "url": "https://mcp.figma.com/mcp"
-    }
-  }
-}
-```
-
-If you're not comfortable editing JSON files directly, you can paste this into Cursor's Composer: *"Add the Figma MCP server to my MCP config. The URL is https://mcp.figma.com/mcp"*
-
----
-
-### Step 4: Restart Cursor and verify
-
-Fully quit Cursor and relaunch it. This is required — the MCP connection initializes at startup, so adding a new server mid-session won't take effect until you restart.
-
-Once relaunched, go to **Cursor → Settings → Cursor Settings → Tools & MCP**. You should see the Figma server listed with a green connected status. If it doesn't appear, restart Cursor once more and retry.
-
----
-
-### Step 5: Use Figma designs in your prototypes
+### Using Figma designs in your prototypes
 
 With the connection active, you can now reference Figma designs directly in Cursor. Copy a frame link from Figma and paste it into your prompt:
 
@@ -434,11 +403,11 @@ Design to shareable prototype: under an hour.
 
 ### Troubleshooting
 
-**The Figma server doesn't appear after adding it** — restart Cursor completely. The MCP connection only initializes at startup.
+**The Figma server doesn't appear after setup** — open the command palette (`Cmd + Shift + P`), search for "Cursor Settings," go to Tools & MCP, and check if Figma is listed. Try clicking Connect again or restart Cursor.
 
-**Cursor can't read the Figma design** — check that your API token is correct and has read permissions. Verify it's stored in `.zshrc` by running `echo $FIGMA_API_KEY` in Terminal.
+**Authentication failed** — make sure you're signed into Figma in your browser. The Connect flow opens a browser tab for OAuth. If it times out, try again.
 
-**Token was invalidated** — this happens when a token is accidentally pasted as a Terminal command instead of stored in `.zshrc`. Generate a new one in Figma and start from Step 2.
+**Cursor can't read a specific Figma file** — check that you have at least view access to the file in Figma. The MCP server uses your Figma account permissions.
 
 ---
 
@@ -622,9 +591,34 @@ When you're building prototypes for a real project, the requirements already liv
 
 Project management tools store structured information about features: user stories, acceptance criteria, priority, linked designs. Giving this context to Cursor means the AI understands not just *what* to build, but *why* — who the user is, what the edge cases are, and what "done" looks like.
 
-### Using Azure DevOps work items
+### Connecting Azure DevOps via MCP
 
-Copy the relevant details from your work item (title, description, acceptance criteria) and paste them into Cursor's Composer as part of your prompt:
+The best approach is to give Cursor direct access to Azure DevOps through an MCP server. This lets the AI read your work items, search backlogs, and pull context automatically — no copy-pasting needed.
+
+Add the Azure DevOps MCP entry to your `~/.cursor/mcp.json` file, inside the existing `mcpServers` object:
+
+```json
+{
+  "mcpServers": {
+    "ado": {
+      "command": "npx",
+      "args": ["-y", "@azure-devops/mcp", "ViewpointVSO", "-d", "core", "search", "work", "work-items"]
+    }
+  }
+}
+```
+
+Restart Cursor after saving. You can verify the connection in **Cursor → Settings → Cursor Settings → Tools & MCP** — look for **ado** in the server list.
+
+Once connected, you can reference work items directly in your prompts:
+
+> Look up user story #4521 in Azure DevOps. Build a React component for it using Modus web components. Follow the Modus layout rules.
+
+Cursor will pull the story title, description, and acceptance criteria from Azure DevOps and use them as context for generating the prototype.
+
+### Using Jira issues
+
+If your team uses Jira instead, copy the issue details — summary, description, acceptance criteria, and any linked design notes — and paste them into Cursor's Composer as part of your prompt. Jira's structured fields translate naturally into AI context.
 
 > Here's the user story I'm working on:
 >
@@ -636,21 +630,6 @@ Copy the relevant details from your work item (title, description, acceptance cr
 > - Flag any employees with missing tax info
 >
 > Build a React component for this using Modus web components. Follow the Modus layout rules.
-
-The more structured the work item, the better the prototype. If your team writes good acceptance criteria, you're already halfway to a working UI.
-
-### Using Jira issues
-
-The same approach works with Jira. Copy the issue details — summary, description, acceptance criteria, and any linked design notes — and paste them into your prompt. Jira's structured fields translate naturally into AI context.
-
-### For teams using Azure DevOps extensions
-
-If your team uses the Azure DevOps extension for VS Code (which also works in Cursor), you can browse and open work items directly from the editor sidebar. This keeps everything in one window — no switching between browser tabs.
-
-To set it up:
-1. Install the **Azure Repos** extension in Cursor (Extensions panel → search "Azure Repos")
-2. Sign in with your Trimble account
-3. Browse work items from the sidebar without leaving your editor
 
 ### Tips for better results
 
