@@ -13,10 +13,10 @@ Most AI prototyping guides stop at Figma plugins and prompt tips. This one goes 
 It covers:
 - Getting comfortable with Terminal
 - Setting up a local dev environment with Homebrew and Node.js
-- Building prototypes with Cursor
+- Building prototypes with Cursor using Modus Web Components, rules and skills
 - Connecting Cursor to Figma
 - Connecting Azure DevOps to Figma
-- Deploying to Vercel and sharing a real URL
+- Deploying to Netlify and sharing a real URL
 - Using AI tools efficiently — model selection and credit management
 
 ---
