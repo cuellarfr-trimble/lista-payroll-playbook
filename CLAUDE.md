@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
+This project is a guide about **Cursor** (the AI code editor). The content teaches designers/PMs how to prototype with Cursor.
+
 Lista Payroll Design Playbook — a single-page React app serving as an interactive guide for designers/PMs learning to prototype with AI tools (Cursor). Content is entirely driven by a markdown file (`public/content.md`), making it editable without touching code.
 
 ## Commands
@@ -20,10 +22,11 @@ Lista Payroll Design Playbook — a single-page React app serving as an interact
 **Layout:** Fixed header (56px) + fixed sidebar (256px) + main content area (max 720px). Mobile breakpoint at 768px collapses sidebar into hamburger menu.
 
 **Components (`src/components/`):**
-- `Header.js` — fixed top bar with title and last-updated date
+- `Header.js` — fixed top bar with title (shortened to "AI Prototyping Playbook" on mobile) and last-updated date (hidden on mobile)
 - `Sidebar.js` — auto-generated navigation from h2 headings, scroll progress indicator
 - `MarkdownRenderer.js` — core rendering with custom handlers for headings, code blocks, tables, blockquotes, checklists, and links
 - `CodeBlock.js` — syntax-highlighted code blocks (react-syntax-highlighter, a11yDark theme) with copy-to-clipboard
+- Site footer — rendered directly in `App.js`, styled via `.site-footer` in `App.css`
 
 **Key patterns:**
 - Section extraction uses regex on numbered h2s (`## 1. Title`) to build nav

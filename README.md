@@ -62,7 +62,7 @@ Edit that file and refresh your browser — no code changes needed. The app fetc
 
 ## About
 
-This is a fork of a guide built originall by by Monica, Design Manager at Savvy, as part of an initiative to get the design team building real, shareable prototypes using AI tools. 
+This is a fork of a guide built original by by Monica, Design Manager at Savvy, as part of an initiative to get the design team building real, shareable prototypes using AI tools. 
 
 ---
 
