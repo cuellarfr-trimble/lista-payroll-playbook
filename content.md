@@ -193,31 +193,6 @@ Cursor is a code editor (like VS Code) with AI built in. It gives you a visual i
 Download from [cursor.com](https://cursor.com). Install like any Mac app. Open a project folder by dragging it onto the Cursor icon.
 
 
-### Step 5: Create your first project
-
-First, let's create a dedicated folder to keep all your projects organized. In Terminal, run:
-
-```
-mkdir projects
-```
-
-Then verify it worked by running:
-
-```
-ls
-```
-
-You should see `projects` listed in the output. Now navigate into it and create your React app:
-
-```
-cd projects
-npx create-react-app my-prototype
-cd my-prototype
-npm run dev
-```
-
-Open your browser and go to `localhost:3000`. You should see the default React welcome page. You now have a working local development environment.
-
 ---
 
 ## 5. Building your first prototype with Cursor
