@@ -96,6 +96,27 @@
   max-width: 720px;
 }
 
+/* ─── Footer ─── */
+
+.site-footer {
+  max-width: 720px;
+  padding: 32px 0;
+  margin-top: 64px;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.02em;
+}
+
+.site-footer a {
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--color-accent);
+}
+
 /* ─── Markdown Content ─── */
 
 .markdown-body h1 {
@@ -477,6 +498,10 @@
   color: var(--color-text-primary);
 }
 
+.header-title-short {
+  display: none;
+}
+
 .header-right {
   display: flex;
   align-items: center;
@@ -761,6 +786,18 @@
 
   .header-title {
     margin-left: 48px;
+  }
+
+  .header-title-full {
+    display: none;
+  }
+
+  .header-title-short {
+    display: inline;
+  }
+
+  .header-right {
+    display: none;
   }
 
   .main-content {

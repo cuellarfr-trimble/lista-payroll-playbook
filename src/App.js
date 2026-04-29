@@ -112,6 +112,9 @@ export default function App() {
               />
             )}
           </div>
+          <footer className="site-footer">
+            Made with ♥ by <a href="https://cuellar.fr" target="_blank" rel="noopener noreferrer">Carlos Cuellar</a> · MIT License · <a href="https://github.com/cuellarfr-trimble/prototyping-playbook" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </footer>
         </main>
       </div>
     </>
