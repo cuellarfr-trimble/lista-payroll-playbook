@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/lista-payroll-playbook/static/css/main.e05f6cd4.css",
-    "main.js": "/lista-payroll-playbook/static/js/main.e9e258fa.js",
-    "static/js/453.e888357f.chunk.js": "/lista-payroll-playbook/static/js/453.e888357f.chunk.js",
-    "index.html": "/lista-payroll-playbook/index.html",
-    "main.e05f6cd4.css.map": "/lista-payroll-playbook/static/css/main.e05f6cd4.css.map",
-    "main.e9e258fa.js.map": "/lista-payroll-playbook/static/js/main.e9e258fa.js.map",
-    "453.e888357f.chunk.js.map": "/lista-payroll-playbook/static/js/453.e888357f.chunk.js.map"
+    "main.css": "/prototyping-playbook/static/css/main.e05f6cd4.css",
+    "main.js": "/prototyping-playbook/static/js/main.642dcd49.js",
+    "static/js/453.e888357f.chunk.js": "/prototyping-playbook/static/js/453.e888357f.chunk.js",
+    "index.html": "/prototyping-playbook/index.html",
+    "main.e05f6cd4.css.map": "/prototyping-playbook/static/css/main.e05f6cd4.css.map",
+    "main.642dcd49.js.map": "/prototyping-playbook/static/js/main.642dcd49.js.map",
+    "453.e888357f.chunk.js.map": "/prototyping-playbook/static/js/453.e888357f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e05f6cd4.css",
-    "static/js/main.e9e258fa.js"
+    "static/js/main.642dcd49.js"
   ]
 }

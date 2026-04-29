@@ -1,4 +1,4 @@
-# Lista Payroll Design Playbook
+# Trimble Construction AI Prototyping Playbook
 **A practical guide to building real things with Cursor**
 
 ---
@@ -25,7 +25,7 @@ GitHub is where code lives. Think of it the way you think of Figma for design fi
 
 When you build a prototype, your code lives in a **repository** (or "repo") — a folder that GitHub tracks. Every time you save a meaningful change, you create a **commit** — a snapshot of your project at that moment. This means you can always go back to an earlier version if something breaks. You can also share a repo with a teammate, and they can pick up where you left off.
 
-You need GitHub for two reasons in this workflow. First, it's where your prototype code is stored, safe and versioned. Second, Vercel (the tool that gives your prototype a real URL) connects directly to GitHub — whenever you push code to GitHub, Vercel automatically redeploys your prototype. That's the deployment pipeline: GitHub stores your code, Vercel publishes it.
+You need GitHub for two reasons in this workflow. First, it's where your prototype code is stored, safe and versioned. Second, Netlify (the tool that gives your prototype a real URL) connects directly to GitHub — whenever you push code to GitHub, Netlify automatically redeploys your prototype. That's the deployment pipeline: GitHub stores your code, Netlify publishes it.
 
 You don't need to deeply understand GitHub to use it in this workflow. There are really only three actions you'll use regularly:
 
@@ -44,22 +44,22 @@ Cursor can do all four of these for you through conversation. You won't need to 
 
 ---
 
-### Step 3: Create a Vercel account
+### Step 3: Create a Netlify account
 
-**What Vercel is and why you need it**
+**What Netlify is and why you need it**
 
 Right now, your prototypes only exist on your laptop. When you run `npm run dev`, you're visiting `localhost:3000` — a website that only lives on your machine. No one else can see it.
 
-Vercel solves that. It takes your code from GitHub and publishes it to the internet, giving you a real URL like `my-prototype.vercel.app` that you can share with anyone — a stakeholder in a meeting, a PM on Slack, a user you're testing with. No installation, no special access required on their end. Just a link.
+Netlify solves that. It takes your code from GitHub and publishes it to the internet, giving you a real URL like `my-prototype.netlify.app` that you can share with anyone — a stakeholder in a meeting, a PM on Slack, a user you're testing with. No installation, no special access required on their end. Just a link.
 
-The deployment process is almost invisible once it's set up. You push code to GitHub, Vercel detects the change, rebuilds your app, and updates the live URL — usually in under a minute. This is called **continuous deployment**, and it means your shareable prototype always reflects your latest work.
+The deployment process is almost invisible once it's set up. You push code to GitHub, Netlify detects the change, rebuilds your app, and updates the live URL — usually in under a minute. This is called **continuous deployment**, and it means your shareable prototype always reflects your latest work.
 
-Vercel is free for personal projects and prototyping. You won't need a paid plan for anything in this guide.
+Netlify is free for personal projects and prototyping. You won't need a paid plan for anything in this guide.
 
 **Create your account:**
-1. Go to [vercel.com](https://vercel.com)
-2. Click "Sign Up" and choose **Continue with GitHub** — this links your accounts automatically
-3. Authorize Vercel to access your GitHub repositories
+1. Go to [netlify.com](https://netlify.com)
+2. Click "Sign Up" and choose **GitHub** — this links your accounts automatically
+3. Authorize Netlify to access your GitHub repositories
 4. You're in. No project setup needed yet — you'll do that later.
 
 ---
@@ -84,7 +84,7 @@ Before moving on, confirm you have all of these:
 
 - [ ] Received company access to Cursor
 - [ ] GitHub account created at github.com with your Trimble email
-- [ ] Vercel account created at vercel.com, connected to GitHub
+- [ ] Netlify account created at netlify.com, connected to GitHub
 - [ ] Cursor downloaded, installed, and account created
 
 Once these are checked off, you're ready. Start with section 1.
@@ -105,15 +105,7 @@ There's a learning curve. We're not going to pretend otherwise. But you don't ne
 
 ## 2. Mental models before we start
 
-Two concepts will make everything else in this guide click.
-
-### Web app vs. desktop app
-
-A **desktop app** is software installed on your computer — like Figma, Slack, or Spotify. It lives in your Applications folder.
-
-A **web app** is software that runs in a browser — like Gmail, Notion, or the Trimble client dashboard. It lives at a URL.
-
-When we build prototypes, we're building web apps. That means the output is a URL you can share with anyone, on any device, with no installation required. It also means the code runs in a browser, which shapes everything about how we build it.
+One concept will make everything else in this guide click.
 
 ### What "running locally" means
 
@@ -121,7 +113,7 @@ When you run a prototype on your own computer, you're spinning up a tiny pretend
 
 This is called a **local development environment**. It sounds intimidating, but the mental model is simple: you're running a mini website on your laptop. When you're done, you stop the server and it goes away. Nothing is published to the internet.
 
-When you're ready to share with someone else, you can deploy it to a real URL (Vercel makes this one command). But for prototyping, local is fine.
+When you're ready to share with someone else, you can deploy it to a real URL (Netlify makes this easy). But for prototyping, local is fine.
 
 ---
 
@@ -230,49 +222,105 @@ Open your browser and go to `localhost:3000`. You should see the default React w
 
 ## 5. Building your first prototype with Cursor
 
-Let's build something real. We'll use a Trimble-flavored example: a client portfolio summary card.
+Let's build something real. But first, let's configure Cursor with the Modus design system so your prototypes look and feel like Trimble products from the start.
 
-### Starting a session
+### Setting up Modus in Cursor (one-step setup)
 
-Navigate to your project folder in Terminal, then run:
+The [Modus design system](https://modus.trimble.com) provides a one-step setup that automatically configures Cursor with everything you need to build Trimble-styled prototypes. A single prompt — pasted into Cursor — installs three things:
 
+**1. Modus Docs MCP** — an MCP server that gives Cursor's AI direct access to Modus Web Components documentation. Instead of guessing how components work, the AI can look up the real API. The MCP config that gets added to your `~/.cursor/mcp.json` looks like this:
+
+```json
+{
+  "mcpServers": {
+    "modus-docs": {
+      "command": "npx",
+      "args": ["-y", "@trimble-oss/moduswebcomponents-mcp@latest"]
+    }
+  }
+}
 ```
-claude
-```
 
-Claude Code will read your project files and be ready to help.
+**2. Modus Rules** — seven rule files installed as Cursor user rules (in `~/.cursor/rules/`). These teach the AI how to write code that follows Trimble's standards:
+
+| Rule file | What it covers |
+|---|---|
+| `modus-essentials.mdc` | Core checklist — packages, styles, theme, events, UX |
+| `modus-wc-integration.mdc` | Cross-stack pitfalls — shadow DOM, events, MCP |
+| `modus-setup.mdc` | Long-form patterns, examples, and checklists |
+| `modus-accessibility.mdc` | WCAG 2.1 AA compliance and inclusive UX |
+| `modus-typography.mdc` | Typography component usage and tokens |
+| `modus-layout.mdc` | Card layouts, spacing, and multi-card pages |
+| `modus-nextjs.mdc` | Next.js App Router integration |
+
+**3. Modus Skills** — seven skill folders installed in `~/.cursor/skills/`, each with a `SKILL.md` file. Skills give the AI step-by-step workflows for specific component patterns:
+
+| Skill folder | What it does |
+|---|---|
+| `modus-wc-autocomplete` | Autocomplete component setup |
+| `modus-wc-chart-colors` | Chart color tokens for light and dark themes |
+| `modus-wc-icons-setup` | Icon setup and usage |
+| `modus-wc-mcp` | MCP integration patterns |
+| `modus-wc-nextjs` | Next.js-specific patterns |
+| `modus-wc-react-slotted-hosts` | React slotted host components |
+| `modus-wc-side-navigation` | Side navigation component |
+
+**How to run the one-step setup:**
+
+1. Open Cursor and press `Cmd + I` to open Composer
+2. Make sure you're in **Agent** mode (check the dropdown at the bottom of Composer)
+3. Go to the [Modus AI Training — One-Step Setup](https://modus.trimble.com/modus-ai/ai-training/create-prototypes/one-step-setup) page
+4. Click **Copy One-Step Setup Prompt**
+5. Paste the prompt into Cursor's Composer and hit Enter
+6. Cursor's AI will handle the rest — installing the MCP server, downloading rules, and setting up skills
+
+When it finishes, restart Cursor so the MCP connection initializes. You can verify the setup by going to **Cursor → Settings → Cursor Settings → Tools & MCP** and confirming that **modus-docs** is listed and connected.
+
+> **Important:** Node.js must be installed before running the one-step setup (you did this in section 4). The MCP server uses `npx` to run, which comes with Node.
+
+---
+
+### Your first prompt
+
+Now that Modus is configured, let's build something. We'll use a Trimble-flavored example: a client portfolio summary card.
+
+Open Cursor and press `Cmd + I` to open Composer. Try this prompt:
+
+> Build a new React + Vite analytics dashboard app. Use Modus web components and use the Modus Docs MCP, Modus Essential Rules, Modus Layout Rules, Modus Setup Rules, Modus Side Nav Skill, and Modus Icon Skill to implement. Run dev server when app is ready.
+
+This is the recommended first prompt from the Modus AI training. It tells Cursor to use the rules, skills, and MCP you just installed. Cursor will scaffold a complete app, install dependencies, and start the dev server for you.
 
 ### How to prompt effectively
 
-Claude Code works best when you give it context upfront. Don't just say what you want — tell it who you're building for, what the interface should feel like, and any constraints.
+Cursor works best when you give it context upfront. Don't just say what you want — tell it who you're building for, what the interface should feel like, and any constraints.
 
 **Weak prompt:**
 > Make a portfolio card component.
 
 **Strong prompt:**
-> I'm building a prototype for a wealth management platform. I need a client portfolio summary card component in React. It should show: client name, total portfolio value, YTD performance (positive/negative with color), and a list of 3 top holdings with ticker symbols and allocation percentages. Use a clean, minimal design with a white background, neutral typography, and a subtle border. No external UI libraries — just CSS modules or inline styles.
+> I'm building a prototype for a wealth management platform. I need a client portfolio summary card component in React. It should show: client name, total portfolio value, YTD performance (positive/negative with color), and a list of 3 top holdings with ticker symbols and allocation percentages. Use Modus web components for the card and typography. Follow the Modus layout rules for spacing.
 
 The more context you give, the closer the first output will be to what you want.
 
 ### Iterating through conversation
 
-Once Claude Code generates something, keep the conversation going:
+Once Cursor generates something, keep the conversation going:
 
 - *"The typography feels too large — scale everything down and add more breathing room between sections."*
 - *"The negative performance should use a muted red, not a bright red. Something like #C0392B at 80% opacity."*
-- *"Add a sparkline chart using only CSS — no chart libraries."*
+- *"Add a sparkline chart using the Modus chart colors skill."*
 
 You don't need to understand the code it writes. You need to be able to describe what's wrong and what you want instead — which is exactly what designers are already good at.
 
 ### Saving your work
 
-Claude Code edits files directly. Your changes are saved automatically. To see updates in the browser, your dev server needs to be running (`npm run dev` in a separate Terminal window). React will hot-reload — the browser updates automatically when files change.
+Cursor edits files directly. Your changes are saved automatically. To see updates in the browser, your dev server needs to be running (`npm run dev` in a separate Terminal window or in Cursor's built-in terminal). React will hot-reload — the browser updates automatically when files change.
 
 ---
 
 ## 6. Cursor as your IDE
 
-If Terminal-only feels like too much at first, Cursor gives you a visual layer on top.
+Cursor gives you a visual layer alongside the AI — you can see your files, preview changes, and chat with the AI in a sidebar panel.
 
 ### Opening a project
 
@@ -282,7 +330,7 @@ Open Cursor, then drag your project folder onto the app icon (or use File → Op
 
 This is your main interface with the AI. Open it with `Cmd + I`. Type your request in natural language — Cursor will propose changes to your files, which you can review and accept or reject before they're applied.
 
-This review step is Cursor's biggest advantage over Claude Code in Terminal: you can see exactly what's changing before it happens.
+This review step is Cursor's biggest advantage: you can see exactly what's changing before it happens.
 
 ### Useful Cursor habits
 
@@ -292,19 +340,11 @@ This review step is Cursor's biggest advantage over Claude Code in Terminal: you
 
 ---
 
-## 7. Connecting Claude Code to Figma
+## 7. Connecting Cursor to Figma
 
-This is where things get genuinely exciting. By connecting Claude Code to Figma, you get true bidirectional prototyping — Claude can read your Figma designs and generate code from them, and you can send working prototypes back to Figma as editable layers. 
+This is where things get exciting. By connecting Cursor to Figma, you can go straight from a Figma design to working code — paste a frame link into Cursor, and the AI reads your layers, spacing, colors, and components to generate a matching React component.
 
-You need to complete two authentications to make this work: an API key (so Claude can read your Figma files) and OAuth (so Claude can write back to Figma). Both are required. Do them in this order.
-
-### Why you need both
-
-**API key** → gives Claude read access to your Figma files. This is how Claude understands your designs, layers, colors, and components when generating code.
-
-**OAuth** → authorizes Claude to write back to Figma. This is what powers "Send this to Figma" — pushing a working prototype back as editable Figma layers.
-
-Skip either one and bidirectional prototyping won't work.
+This is a one-way connection: Figma → Code. You can pull designs into Cursor, but you can't push code back to Figma. That's fine for prototyping — the goal is to get from design to a working, shareable URL as fast as possible.
 
 ---
 
@@ -312,7 +352,7 @@ Skip either one and bidirectional prototyping won't work.
 
 In Figma: click your profile icon → Settings → Security → Personal access tokens → Generate new token.
 
-When it asks about permissions, **turn on all read and write access**. This is important — a read-only token will let Claude pull in your designs but won't let it send anything back.
+When it asks about permissions, **turn on read access**. This is what Cursor needs to read your designs.
 
 Copy the token and save it somewhere safe like 1Password. You won't be able to see it again after closing the modal.
 
@@ -320,7 +360,7 @@ Copy the token and save it somewhere safe like 1Password. You won't be able to s
 
 ### Step 2: Store the token in your shell
 
-This is the step most people get stuck on. You're going to store your token as an environment variable so Claude Code can access it automatically every time it runs.
+This is the step most people get stuck on. You're going to store your token as an environment variable so Cursor can access it automatically every time it runs.
 
 In Terminal, open your `.zshrc` file:
 
@@ -359,78 +399,69 @@ You should see your token printed back. If you see nothing, the save didn't work
 
 ---
 
-### Step 3: Add the Figma MCP server
+### Step 3: Add the Figma MCP server to Cursor
 
-Now tell Claude Code where to find Figma. Run this in Terminal:
+Now tell Cursor where to find Figma. Open (or create) the file `~/.cursor/mcp.json` and add the Figma server entry. If you already have Modus configured from the one-step setup, you'll be adding to the existing `mcpServers` object:
 
-```bash
-# For the current project only
-claude mcp add --transport http figma https://mcp.figma.com/mcp
-
-# Or to make it available across all your projects
-claude mcp add --scope user --transport http figma https://mcp.figma.com/mcp
+```json
+{
+  "mcpServers": {
+    "modus-docs": {
+      "command": "npx",
+      "args": ["-y", "@trimble-oss/moduswebcomponents-mcp@latest"]
+    },
+    "figma": {
+      "url": "https://mcp.figma.com/mcp"
+    }
+  }
+}
 ```
 
-We recommend the `--scope user` version so you only have to do this once.
+If you're not comfortable editing JSON files directly, you can paste this into Cursor's Composer: *"Add the Figma MCP server to my MCP config. The URL is https://mcp.figma.com/mcp"*
 
 ---
 
-### Step 4: Restart Claude Code and authenticate via OAuth
+### Step 4: Restart Cursor and verify
 
-Fully quit Claude Code and relaunch it. This is required — the MCP connection initializes at startup, so adding a new server mid-session won't take effect until you restart.
+Fully quit Cursor and relaunch it. This is required — the MCP connection initializes at startup, so adding a new server mid-session won't take effect until you restart.
 
-Once relaunched, type:
-
-```
-/mcp
-```
-
-You'll see the Figma server listed. Select it, choose **Authenticate**, and complete the OAuth flow in your browser. When you see:
-
-```
-✓ Authentication successful. Connected to figma
-```
-
-You're connected. This OAuth step is what authorizes the write direction — sending things back to Figma.
+Once relaunched, go to **Cursor → Settings → Cursor Settings → Tools & MCP**. You should see the Figma server listed with a green connected status. If it doesn't appear, restart Cursor once more and retry.
 
 ---
 
-### Step 5: Verify the connection
+### Step 5: Use Figma designs in your prototypes
 
-Run `/mcp` again. The Figma server should show a green connected status. If it doesn't, restart Claude Code once more and retry.
+With the connection active, you can now reference Figma designs directly in Cursor. Copy a frame link from Figma and paste it into your prompt:
 
----
+> Build a React component from this Figma frame — [paste frame link]. Use Modus web components and follow our design system tokens.
 
-### Step 6: Send your prototype to Figma
+Cursor reads the design and generates code. Run `npm start` to see it in the browser.
 
-Build something in Claude Code, preview it in your browser, then type in Claude Code:
-
-```
-Send this to Figma
-```
-
-A capture toolbar will appear in your browser. You can capture the entire screen or select specific elements. The captured UI appears as editable frames in your Figma workspace — you can then paste them into any existing project, refine them in Figma, and continue iterating.
-
----
-
-### A full bidirectional workflow
+### A typical Figma-to-code workflow
 
 1. Design a component in Figma with auto-layout and named layers
-2. In Claude Code: *"Build a React component from this Figma frame — [paste frame link]"*
-3. Claude reads the design and generates code. Run `npm start` to see it in the browser.
-4. Iterate in Claude Code: *"The padding feels tight — add 8px on all sides and soften the border radius"*
-5. When happy: type "Send this to Figma" — your working prototype lands back in Figma as editable layers
-6. Deploy to Vercel with `npx vercel` and share the URL
+2. Copy the frame link from Figma
+3. In Cursor: *"Build a React component from this Figma frame — [paste frame link]"*
+4. Cursor reads the design and generates code. Run `npm start` to see it in the browser.
+5. Iterate in Cursor: *"The padding feels tight — add 8px on all sides and soften the border radius"*
+6. Deploy to Netlify and share the URL
 
-Start to shareable prototype, with a round-trip to Figma: under an hour.
+Design to shareable prototype: under an hour.
+
+### Tips for better Figma-to-code results
+
+- **Use auto-layout** — Cursor translates auto-layout into flexbox, which produces much cleaner code than absolute positioning.
+- **Name your layers descriptively** — "Header", "Sidebar", "ClientCard" are far more useful than "Frame 47" or "Group 12".
+- **Link to a specific frame** — don't link to an entire Figma page. The more focused the frame, the better the output.
+- **Add context in your prompt** — tell Cursor what the component is for and how it should behave, not just what it looks like.
 
 ---
 
 ### Troubleshooting
 
-**The Figma server doesn't appear after adding it** — restart Claude Code completely. The MCP connection only initializes at startup.
+**The Figma server doesn't appear after adding it** — restart Cursor completely. The MCP connection only initializes at startup.
 
-**Authentication successful but nothing sends to Figma** — check that your API token has write permissions. Go back to Figma settings and confirm all read/write access is enabled on the token.
+**Cursor can't read the Figma design** — check that your API token is correct and has read permissions. Verify it's stored in `.zshrc` by running `echo $FIGMA_API_KEY` in Terminal.
 
 **Token was invalidated** — this happens when a token is accidentally pasted as a Terminal command instead of stored in `.zshrc`. Generate a new one in Figma and start from Step 2.
 
@@ -441,7 +472,7 @@ Start to shareable prototype, with a round-trip to Figma: under an hour.
 Copy, adapt, and make these your own.
 
 ### Generate a component from scratch
-> I'm building a [type of interface] for [audience]. Create a React component for [specific element]. It should [describe behavior/content]. Design it to feel [aesthetic direction — clean/minimal/dense/etc.]. Use [white background / our brand colors / etc.]. No external libraries.
+> I'm building a [type of interface] for [audience]. Create a React component for [specific element]. It should [describe behavior/content]. Design it to feel [aesthetic direction — clean/minimal/dense/etc.]. Use Modus web components and follow Modus layout rules. No additional external UI libraries.
 
 ### Match an existing design system
 > Here's the color palette and typography we use: [paste your tokens or describe them]. Generate a [component] that matches this system exactly. Use these exact hex values and font sizes.
@@ -453,7 +484,7 @@ Copy, adapt, and make these your own.
 > This component isn't rendering correctly — [describe what's wrong]. Here's the current code: [paste code]. What's wrong and how do I fix it?
 
 ### Translate a Figma description to code
-> I have a Figma component with the following properties: [describe layers, spacing, colors]. Build a React component that matches this structure. Use CSS modules.
+> I have a Figma component with the following properties: [describe layers, spacing, colors]. Build a React component that matches this structure. Use Modus web components where possible.
 
 ---
 
@@ -467,86 +498,248 @@ Another dev server is running somewhere. Either stop it (`Ctrl + C` in the Termi
 ### "Module not found" or "Cannot find package"
 A dependency isn't installed. Run `npm install` in your project folder and try again.
 
-### Claude generated code that won't compile
-Copy the error from Terminal and paste it directly into your Claude Code session: *"I'm getting this error — [paste error]. How do I fix it?"* Claude will usually solve it immediately.
+### Cursor generated code that won't compile
+Copy the error from Terminal and paste it directly into Cursor's Composer: *"I'm getting this error — [paste error]. How do I fix it?"* Cursor will usually solve it immediately.
 
 ### The Figma MCP isn't connecting
-Double-check your `.mcp.json` file — the token needs to be pasted exactly, no extra spaces. Make sure you've restarted Claude Code after creating the file.
+Double-check your `~/.cursor/mcp.json` file — the URL and token need to be correct, no extra spaces. Make sure you've restarted Cursor after editing the file.
+
+### The Modus MCP isn't working
+Go to **Cursor → Settings → Cursor Settings → Tools & MCP** and check that **modus-docs** is listed and connected. If it's erroring, make sure Node.js is installed (`node --version` in Terminal). Try restarting Cursor.
 
 ### The output looks nothing like my Figma design
-Your Figma file may not be structured clearly enough for Claude to read. Check that you're using auto-layout, that layers are named descriptively, and that you're linking to a specific frame (not a whole page). Try adding more context in your prompt about the design intent.
+Your Figma file may not be structured clearly enough for the AI to read. Check that you're using auto-layout, that layers are named descriptively, and that you're linking to a specific frame (not a whole page). Try adding more context in your prompt about the design intent.
 
 ### I have no idea what I'm looking at in the code
-That's fine. You don't need to understand every line. Describe what you want to change in plain English and let Claude handle the code. Over time, you'll start to recognize patterns — but that's a side effect, not a prerequisite.
+That's fine. You don't need to understand every line. Describe what you want to change in plain English and let Cursor handle the code. Over time, you'll start to recognize patterns — but that's a side effect, not a prerequisite.
 
 ---
 
-## 10. Your first week
-
-Low pressure. Concrete steps.
-
-**Day 1 — Environment, first component, and Figma connection (all in one hour)**
-Get your environment running, build something real, and connect to Figma — all in a single focused session. Install Node.js, get Claude Code or Cursor running, create a React project, and see `localhost:3000` in your browser. Then ask Claude Code to build one component from scratch using a real Trimble use case — a data table, a summary card, a form. Finally, set up the Figma MCP connection and do one round-trip: take a frame from a current project, generate a component from it, and send something back. Don't aim for perfection. Just get the full loop working.
-
-**Day 2 — Build**
-Take whatever you built on Day 1 and spend 30 minutes improving it through conversation. Practice describing visual changes in words — spacing, hierarchy, color, interaction. This is the core skill. The more precisely you can describe what you want, the faster Claude moves.
-
-**Day 3 — Deploy**
-Deploy your prototype to Vercel (`npx vercel` — it'll walk you through setup) and share the URL in #team-design. You built a real, shareable web app. That's worth celebrating.
-
----
-
-## 11. Using AI tools efficiently — credits and model selection
+## 10. Using AI tools efficiently — credits and model selection
 
 AI coding tools aren't free to run. Every prompt you send uses credits, and the more powerful the model, the more credits it costs. Learning to use the right model for the right job — and to structure your prompts efficiently — will make your credits go a lot further.
 
 ### Understanding the model tiers
 
-Both Claude and Cursor give you access to different models at different capability (and cost) levels. Think of them like tools in a toolbox — you wouldn't use a sledgehammer to hang a picture frame.
+Cursor gives you access to different models at different capability (and cost) levels. Think of them like tools in a toolbox — you wouldn't use a sledgehammer to hang a picture frame.
 
-**Opus** is the most powerful and the most expensive. It's built for hard thinking — complex architecture decisions, understanding an unfamiliar codebase, debugging a gnarly problem you can't figure out, or generating a large feature from scratch with a lot of moving parts. Use it when you're stuck or when the task genuinely requires reasoning through something complicated. Don't burn Opus on simple tasks.
+**Composer 2** is Cursor's own model, tuned specifically for multi-file edits and agent-style runs. It's the default for a reason — fast, capable, and optimized for the kinds of tasks you'll do most: building components, iterating on layouts, wiring up pages. For most prototyping work, this is the one to use.
 
-**Sonnet** is the sweet spot for most prototyping work. Fast, capable, and significantly cheaper than Opus. Use it for building components, iterating on layouts, making a series of targeted changes, or any task where you have a clear idea of what you want and just need it executed well.
+**Composer 2 Fast** is the lightweight version of Composer 2. Use it for simple, mechanical tasks — updating a hex color value, changing a text string, reformatting a file, fixing a typo. If the task requires almost no judgment, this saves credits without losing quality.
 
-**Haiku** (or equivalent lightweight models) is best for simple, mechanical tasks — updating a hex color value, changing a text string, reformatting a file, fixing a typo in code. If the task requires almost no judgment, use the cheapest model available.
+**Claude Opus** (Anthropic) is the most powerful reasoning model available in Cursor. It's built for hard thinking — complex architecture decisions, debugging gnarly problems you can't figure out, or generating a large feature from scratch with a lot of moving parts. Use it when you're stuck or when the task genuinely requires reasoning through something complicated. Don't burn Opus on simple tasks.
 
-**A simple rule of thumb:** if you could explain the task to a junior engineer in one sentence and they'd get it right, use a fast model. If you'd need to sit down and walk through it together, use Opus.
+**Claude Sonnet** (Anthropic) sits between Composer 2 and Opus. Strong reasoning and instruction-following with generous context. Good for careful refactors, large-diff review, and spec-to-code work when you want the model to read deeply before it edits.
+
+**GPT-5.5** (OpenAI) is another high-capability option. Broad coding knowledge and solid tool use — useful as an alternative perspective when Composer 2 or Sonnet output isn't quite landing, or when your team standardizes on OpenAI models.
+
+**Auto mode** lets Cursor pick the model for you based on the complexity of your prompt. It routes simple tasks to fast models and complex tasks to stronger ones. This is a good default if you don't want to think about model selection — it won't always be optimal, but it prevents the most common mistake (burning expensive models on trivial edits).
+
+**A simple rule of thumb:** if you could explain the task to a junior engineer in one sentence and they'd get it right, use Composer 2 Fast or Auto. If you'd need to sit down and walk through it together, use Opus.
 
 ### How to switch models in Cursor
 
-In the Composer panel, there's a model selector dropdown at the bottom of the input field. Click it to switch between Claude Opus, Sonnet, or Haiku before sending your prompt. Get in the habit of glancing at this before you hit Enter — it takes two seconds and can save a lot of credits over a week.
+In the Composer panel, there's a model selector dropdown at the bottom of the input field. Click it to switch between models before sending your prompt. Get in the habit of glancing at this before you hit Enter — it takes two seconds and can save a lot of credits over a week. If you're unsure, set it to **Auto** and let Cursor decide.
 
-### How to switch models in Claude Code
+Over time you'll develop an intuition for when something warrants Opus versus when Composer 2 will nail it. When in doubt, start with Auto or Composer 2 — you can always escalate to Opus if the output isn't quite right.
 
-In a Claude Code session, you can specify the model with a flag when you start:
+---
+
+## 11. Git basics for designers
+
+You've been using Git without realizing it. Every time Cursor commits your changes or you push code to GitHub, you're using Git. This section gives you just enough understanding to work confidently — not to become a Git expert.
+
+### The mental model
+
+Think of Git like a timeline for your project. Every commit is a snapshot — a save point you can always go back to. A branch is an alternate timeline where you can try things without affecting the original.
 
 ```
-claude --model claude-opus-4-5
-claude --model claude-sonnet-4-5
-claude --model claude-haiku-4-5
+main        ● ─── ● ─── ● ─── ● ─── ●
+                         \           ↗
+feature      	           ● ─── ● ─
 ```
 
-Or switch mid-session by typing `/model` and selecting from the list.
+The `main` branch is the stable version of your project. When you start working on something new, you create a branch — a copy where your changes live in isolation. When you're happy with the work, you merge the branch back into `main`.
 
-### Structuring prompts to use fewer credits
+### Key concepts
 
-**Go big upfront.** The most expensive thing you can do is send five small prompts to do what one thorough prompt could have accomplished. Before you start a session, write out everything you want — all the changes, all the constraints, all the context — and send it as one prompt. Cursor and Claude Code both perform better with more context anyway.
+**Commit** — a save point. Each commit has a short message describing what changed. Think of it like "Save As" but smarter — Git only stores what's different, and you can go back to any previous commit.
 
-**Tell it not to ask questions.** By default, AI tools will sometimes pause and check in. Add "don't ask clarifying questions, make reasonable decisions" to any big prompt and it'll complete the whole task in one pass.
+**Branch** — a parallel version of your project. You work on a branch so your experiments don't break the stable version. The naming convention is usually descriptive: `feature/dashboard-cards`, `fix/mobile-layout`.
 
-**Highlight before prompting in Cursor.** Select only the code you want to change before opening Composer. If you don't highlight anything, Cursor scans your entire project for context — which costs more and can introduce noise. Scoping your selection keeps the AI focused and your credit usage low.
+**Pull Request (PR)** — a request to merge your branch into `main`. This is where teammates can review your changes before they go live. Even if you're working solo, PRs create a clean history of what changed and why.
 
-**Batch small changes.** Instead of sending three separate prompts to update a font size, change a border color, and adjust padding, combine them into one: "Make these three changes to the sidebar component — [list them]." Three prompts versus one is a 3x credit difference for the same outcome.
+**Merge** — combining your branch back into `main`. If two people changed the same file, Git will ask you to resolve the conflict (pick which version to keep). Cursor can help with this.
 
-**Use Tab autocomplete for tiny edits.** In Cursor, if you're making a small code change — tweaking a number, updating a string — just start typing and let Tab autocomplete finish the line. This is free and instant. Reserve AI prompts for things that actually need reasoning.
+### How Cursor handles Git for you
 
-**Don't re-explain context.** Claude Code maintains context within a session. If you've already told it what you're building and what the design system looks like, you don't need to repeat it every prompt. Just describe the change you want. Starting a new session does reset the context, so try to batch related work into a single session when you can.
+You don't need to memorize commands. In Cursor's Composer, you can say:
 
-### A practical credit budget mindset
+- *"Create a new branch called feature/payroll-dashboard"*
+- *"Commit my changes with the message 'Add employee summary card'"*
+- *"Push my changes to GitHub"*
+- *"Create a pull request for this branch"*
 
-Think of each session like a working meeting. Open it with a clear agenda (your big upfront prompt), use the right tool for each agenda item (model selection), and don't schedule five meetings to do what one could accomplish (batching). Close the session when you're done rather than leaving it idle.
+Cursor also has a built-in **Source Control** panel (click the branch icon in the left sidebar) where you can see changed files, stage changes, and commit — all with clicks, no Terminal required.
 
-Over time you'll develop an intuition for when something warrants Opus versus when Sonnet will nail it. When in doubt, start with Sonnet — you can always escalate to Opus if the output isn't quite right.
+### A safe workflow
+
+1. **Before starting new work:** Make sure you're on `main` and pull the latest changes
+2. **Create a branch** for each feature or experiment
+3. **Commit often** — small, frequent commits are safer than one giant save at the end
+4. **Push to GitHub** regularly — this is your backup
+5. **Open a PR** when the work is ready for review or when you want to deploy
+
+If something goes wrong on a branch, `main` is untouched. You can always start a fresh branch. This safety net is why branching matters — it makes experimentation free.
+
+---
+
+## 12. Deploying your prototype to Netlify
+
+You've built something on your laptop. Now let's put it on the internet so anyone can see it.
+
+### First-time setup: connect GitHub to Netlify
+
+1. Go to [app.netlify.com](https://app.netlify.com)
+2. Click **Add new site** → **Import an existing project**
+3. Choose **GitHub** and authorize Netlify if you haven't already
+4. Select your prototype's repository from the list
+5. Netlify will auto-detect the build settings. For a React app, confirm:
+   - **Build command:** `npm run build`
+   - **Publish directory:** `build`
+6. Click **Deploy site**
+
+Netlify will build your project and give you a URL like `random-name-1234.netlify.app`. You can customize this under **Site settings → Domain management → Custom domains** to something like `my-prototype.netlify.app`.
+
+### Automatic deploys
+
+Once connected, every time you push code to the `main` branch on GitHub, Netlify automatically rebuilds and updates your live URL. You don't need to do anything — push your code, wait about a minute, and the live site reflects your latest changes.
+
+This is why the Git workflow from section 11 matters: push to `main` and your prototype is live.
+
+### Deploy previews for branches
+
+Netlify also creates **deploy previews** for pull requests. When you open a PR on GitHub, Netlify builds that branch and gives it a temporary URL. This is incredibly useful — you can share a preview link with a stakeholder before merging, so they see exactly what they're approving.
+
+### Manual deploys from Cursor
+
+If you want to deploy without pushing to GitHub first, you can use the Netlify CLI. In Cursor's terminal or Composer:
+
+```
+npx netlify-cli deploy --prod --dir=build
+```
+
+The first time you run this, it'll ask you to log in and link your site. After that, it's a one-command deploy.
+
+### Common deployment issues
+
+**Build fails on Netlify but works locally** — usually a case sensitivity issue. Mac file systems are case-insensitive (`Header.js` and `header.js` are the same file), but Netlify's Linux build is case-sensitive. Check your import statements.
+
+**Site deploys but shows a blank page** — check that your `build` directory contains an `index.html`. For Create React App projects, make sure the `homepage` field in `package.json` is set correctly (or remove it entirely for Netlify).
+
+---
+
+## 13. Connecting to Azure DevOps or Jira
+
+When you're building prototypes for a real project, the requirements already live somewhere — usually Azure DevOps or Jira. Instead of re-typing context into Cursor, you can pull work items directly into your prompts.
+
+### The concept
+
+Project management tools store structured information about features: user stories, acceptance criteria, priority, linked designs. Giving this context to Cursor means the AI understands not just *what* to build, but *why* — who the user is, what the edge cases are, and what "done" looks like.
+
+### Using Azure DevOps work items
+
+Copy the relevant details from your work item (title, description, acceptance criteria) and paste them into Cursor's Composer as part of your prompt:
+
+> Here's the user story I'm working on:
+>
+> **As a** construction business owner **I want to** see a summary of upcoming payroll obligations **so that** I can plan cash flow for the week.
+>
+> Acceptance criteria:
+> - Show next payroll date and estimated total
+> - Show breakdown by W-2 vs 1099 workers
+> - Flag any employees with missing tax info
+>
+> Build a React component for this using Modus web components. Follow the Modus layout rules.
+
+The more structured the work item, the better the prototype. If your team writes good acceptance criteria, you're already halfway to a working UI.
+
+### Using Jira issues
+
+The same approach works with Jira. Copy the issue details — summary, description, acceptance criteria, and any linked design notes — and paste them into your prompt. Jira's structured fields translate naturally into AI context.
+
+### For teams using Azure DevOps extensions
+
+If your team uses the Azure DevOps extension for VS Code (which also works in Cursor), you can browse and open work items directly from the editor sidebar. This keeps everything in one window — no switching between browser tabs.
+
+To set it up:
+1. Install the **Azure Repos** extension in Cursor (Extensions panel → search "Azure Repos")
+2. Sign in with your Trimble account
+3. Browse work items from the sidebar without leaving your editor
+
+### Tips for better results
+
+- **Include the persona** — if your work item references a specific user type, include that context. "Sandra is a bookkeeper managing payroll for multiple clients" gives the AI much better judgment about UI density and workflow.
+- **Include acceptance criteria** — these translate directly into UI states and edge cases the prototype should handle.
+- **Reference related items** — if a story depends on another feature, mention it so the AI understands the broader context.
+- **Don't paste the entire epic** — focus on the specific story or task you're prototyping. Too much context dilutes the prompt.
+
+---
+
+## 14. Running accessibility audits
+
+Every prototype should be usable by everyone. Accessibility isn't a nice-to-have — it's a Trimble standard. The good news: if you set up Modus in section 5, you already have the `modus-accessibility.mdc` rule installed, which means Cursor's AI is already writing more accessible code by default.
+
+But rules alone aren't enough. Running a quick audit after each prototype catches issues early, before they get baked into the final product.
+
+### Ask Cursor to audit your prototype
+
+The simplest approach — paste this into Composer after building a feature:
+
+> Run an accessibility audit on this prototype. Check for:
+> - Missing alt text on images
+> - Color contrast ratios (WCAG 2.1 AA minimum)
+> - Keyboard navigation (can I tab through all interactive elements?)
+> - Missing form labels
+> - Correct heading hierarchy (h1 → h2 → h3, no skipped levels)
+> - ARIA attributes where needed
+>
+> Fix any issues you find and explain what you changed.
+
+Cursor will scan the code, identify problems, and fix them in one pass. Review the changes in the diff view to understand what was wrong.
+
+### Use your browser's built-in tools
+
+Chrome and Edge have accessibility auditing built in. No extensions needed.
+
+1. Open your prototype in the browser (`localhost:3000`)
+2. Open DevTools (`Cmd + Option + I`)
+3. Go to the **Lighthouse** tab
+4. Check only **Accessibility** and click **Analyze page load**
+5. You'll get a score out of 100 and a list of specific issues with links to explanations
+
+A score of 90+ is the target. Common issues for prototypes:
+- Missing `alt` attributes on images
+- Low color contrast on text
+- Buttons or links without accessible names
+- Form inputs without associated labels
+
+### The quick checklist
+
+Run through this after each major feature:
+
+- [ ] Can you navigate the entire UI using only the keyboard (Tab, Enter, Escape)?
+- [ ] Does every image have meaningful alt text (or `alt=""` for decorative images)?
+- [ ] Is the color contrast ratio at least 4.5:1 for normal text and 3:1 for large text?
+- [ ] Do all form inputs have visible labels?
+- [ ] Is the heading structure logical (no skipped levels)?
+- [ ] Do interactive elements have visible focus indicators?
+
+### Why this matters for prototypes specifically
+
+It's tempting to skip accessibility on something that's "just a prototype." But prototypes shape the final product. If the prototype has accessibility baked in, the production code inherits it. If it doesn't, those issues tend to persist — engineers implement what they see, and retro-fitting accessibility is always harder than building it in.
+
+The Modus design system handles a lot of this automatically (color tokens meet contrast ratios, components include ARIA attributes), which is another reason the one-step setup from section 5 pays off.
 
 ---
 
