@@ -1,4 +1,4 @@
-# An AI Guide for Designers working on Lista Payroll
+# A designer's guide to prototyping with Cursor 
 
 A practical guide for designers learning to build real prototypes with Cursor. Built by Carlos Cuellar, UX Lead at [Trimble](https://www.trimble.com).
 
