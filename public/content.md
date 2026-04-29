@@ -341,6 +341,13 @@ This is your main interface with the AI. Open it with `Cmd + I`. Type your reque
 
 This review step is Cursor's biggest advantage: you can see exactly what's changing before it happens.
 
+Composer has four modes — switch between them using the dropdown at the top of the panel:
+
+- **Agent** — the default. It reads your project, edits files, runs commands, and builds things end-to-end. Use this most of the time.
+- **Ask** — answers questions without changing any files. Good for understanding code or exploring options.
+- **Plan** — outlines an approach before doing anything. Useful when you want to review the strategy before committing to it.
+- **Debug** — focused on diagnosing and fixing errors. Paste an error message and let it work.
+
 ### Useful Cursor habits
 
 - **Highlight code before prompting** — select a specific component or function, then open Composer. The AI will focus on just that selection.
