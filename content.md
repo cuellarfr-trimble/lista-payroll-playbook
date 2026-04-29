@@ -561,16 +561,6 @@ This is why the Git workflow from section 11 matters: push to `main` and your pr
 
 Netlify also creates **deploy previews** for pull requests. When you open a PR on GitHub, Netlify builds that branch and gives it a temporary URL. This is incredibly useful — you can share a preview link with a stakeholder before merging, so they see exactly what they're approving.
 
-### Manual deploys from Cursor
-
-If you want to deploy without pushing to GitHub first, you can use the Netlify CLI. In Cursor's terminal or Composer:
-
-```
-npx netlify-cli deploy --prod --dir=build
-```
-
-The first time you run this, it'll ask you to log in and link your site. After that, it's a one-command deploy.
-
 ### Common deployment issues
 
 **Build fails on Netlify but works locally** — usually a case sensitivity issue. Mac file systems are case-insensitive (`Header.js` and `header.js` are the same file), but Netlify's Linux build is case-sensitive. Check your import statements.
