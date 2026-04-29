@@ -89,7 +89,9 @@
   padding: 64px 64px 128px;
   max-width: calc(720px + 128px + 256px);
   width: 100%;
+  min-width: 0;
   padding-top: calc(56px + 64px);
+  overflow-x: hidden;
 }
 
 .main-content-inner {
@@ -314,7 +316,7 @@
   width: 100%;
   margin: 24px 0;
   border-radius: var(--radius-md);
-  overflow: hidden;
+  overflow-x: auto;
   border: 1px solid var(--color-border);
 }
 
@@ -757,7 +759,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .mobile-menu-btn {
     display: block;
   }
