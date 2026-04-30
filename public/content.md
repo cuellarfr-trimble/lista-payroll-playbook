@@ -27,14 +27,15 @@ When you build a prototype, your code lives in a **repository** (or "repo") — 
 
 You need GitHub for two reasons in this workflow. First, it's where your prototype code is stored, safe and versioned. Second, Netlify (the tool that gives your prototype a real URL) connects directly to GitHub — whenever you push code to GitHub, Netlify automatically redeploys your prototype. That's the deployment pipeline: GitHub stores your code, Netlify publishes it.
 
-You don't need to deeply understand GitHub to use it in this workflow. There are really only three actions you'll use regularly:
+You don't need to deeply understand GitHub to use it in this workflow. There are really only five actions you'll use regularly:
 
 - **Clone** — download a repo to your computer so you can work on it
+- **Branch** — create a separate copy of your project to try changes without affecting the original
 - **Commit** — save a snapshot of your changes with a short description
 - **Pull** — download the latest changes from Github to your computer
 - **Push** — send your local changes up to GitHub
 
-Cursor can do all four of these for you through conversation. You won't need to memorize commands.
+Cursor can do all five of these for you through conversation. You won't need to memorize commands.
 
 **Create your account:**
 1. Go to [github.com](https://github.com)
